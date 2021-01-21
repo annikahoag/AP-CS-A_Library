@@ -127,6 +127,8 @@ public class Main {
 	
 			
 			}//end of while 
+			
+		//catch user entering anything other than numbers	
 		}catch (java.util.InputMismatchException e) {
 			System.out.println("Please only enter numbers.");
 			System.out.println("Program is ending");

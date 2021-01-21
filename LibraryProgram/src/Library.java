@@ -139,7 +139,7 @@ public class Library {
 		if(bookIndex!=-1) {
 			copiesLeft = bookList.get(bookIndex).getCopies();
 			
-			//if there's enough copies take in date and borrower 
+			//if there's enough copies, take in date and borrower 
 			//EXTRA CREDIT- take away copies when loaned 
 			if (copiesLeft > 0) {
 				System.out.println("Please enter the date the book is loaned out. "
@@ -210,6 +210,9 @@ public class Library {
 			
 		}catch (StringIndexOutOfBoundsException e) {
 			System.out.println("You messed up entering the date in the right format.");
+			isValid = false;
+		}catch (NumberFormatException e) {
+			System.out.println("Date has to be in MM/DD/YYYY format");
 			isValid = false;
 		}
 		return isValid;
@@ -356,7 +359,8 @@ public class Library {
 	}
 	
 	
-	//print all borrowed books 
+	//print all borrowed books
+	//if more than one borrower, prints all borrowers 
 	public void printBorrowed() {
 
 		
@@ -374,7 +378,8 @@ public class Library {
 	}
 	
 	
-	
+	//parse currentDate into month, day and year
+	//call loopDates to figure out if the book is 2 wks late
 	public void twoWeeksLate(String currentDate) {
 		boolean isValid;
 		String date=currentDate;
@@ -411,6 +416,12 @@ public class Library {
 	
 		}catch (MyException ex) {
 			System.out.println(ex.getMessage());
+		}catch (StringIndexOutOfBoundsException e) {
+			System.out.println("You messed up entering the date in the right format.");
+			isValid = false;
+		}catch (NumberFormatException e) {
+			System.out.println("Date has to be in MM/DD/YYYY format");
+			isValid = false;
 		}
 		
 
@@ -463,14 +474,7 @@ public class Library {
 	}
 	
 	
-	
-
-	
-
-	
-	
-	
-	
+		
 	
 	
 	

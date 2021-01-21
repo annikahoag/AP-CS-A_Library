@@ -138,7 +138,7 @@ public class Book {
 	
 	
 	//loops through nameList, prints borrower name and date
-	//EXTRA CREDIT: print number of copies left 
+	//EXTRA CREDIT: print number of copies left, print all borrowers
 	public void loopNames () {
 		String dateString;
 		String dayS, monthS, yearS;
@@ -186,8 +186,8 @@ public class Book {
 				
 				if (timeOut > dueDate+14) {
 					sTimeOut = String.valueOf(timeOut);
-					System.out.printf("%-25s%-25s%-25s%s", "Title: " + title, "Author: " + author, 
-							"Borrower: " + nameList.get(i), "Days Out: " + sTimeOut);	
+					System.out.printf("%-25s%-25s%-25s", "Title: " + title, "Author: " + author, 
+							"Borrower: " + nameList.get(i));	
 					System.out.println();
 				}
 			}
@@ -246,27 +246,31 @@ public class Book {
 			int nextMonth;
 			int lastDay, lastDayNext;
 			
-			nextMonth = this.getNextMonth(monthChecked);
-			
-			lastDay = this.getLastDay(monthChecked, yearChecked);
-			daysOut = lastDay - dayChecked;
-			while (nextMonth != monthCurrent) {
+			if (monthChecked < monthCurrent) {
+				nextMonth = this.getNextMonth(monthChecked);
 				
-				lastDayNext = this.getLastDay(nextMonth, yearChecked);
-				daysOut = daysOut + lastDayNext;
+				lastDay = this.getLastDay(monthChecked, yearChecked);
+				daysOut = lastDay - dayChecked;
+				while (nextMonth != monthCurrent) {
+					
+					lastDayNext = this.getLastDay(nextMonth, yearChecked);
+					daysOut = daysOut + lastDayNext;
+					
+					nextMonth ++;
+				}
 				
-				nextMonth ++;
-			}
-			
-			daysOut = daysOut + dayCurrent;
-			isNeg = this.isNeg(daysOut);
-			
-			if (isNeg) {
-				if (isLast) {
-					System.out.println("Day entered is before " + title + " was checked out.");
+				daysOut = daysOut + dayCurrent;
+				isNeg = this.isNeg(daysOut);
+				
+				if (isNeg) {
+					if (isLast) {
+						System.out.println("Day entered is before " + title + " was checked out.");
+					}
+				}else {
+					return daysOut;
 				}
 			}else {
-				return daysOut;
+				System.out.println("Date entered is before " + title + " was checked out.");
 			}
 		}
 		
